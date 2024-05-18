@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DIRECCION DE TALENTO HUMANO - FORMULARIO DE LICENCIAS Y PERMISOS</title>
+	<style>
+		/* Estilos para la página */
+		body {
+			font-family: Arial, sans-serif;
+		}
+		.formulario {
+			width: 50%;
+			margin: 40px auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		.label {
+			display: block;
+			margin-bottom: 10px;
+		}
+		.input {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+		}
+		.select {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+		}
+		.button {
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.button:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<div class="formulario">
+		<h2>Formulario de Permiso</h2>
+		<form id="formulario">
+			<div class="label">
+				<label for="apellidos-y-nombres">Apellidos y Nombres:</label>
+				<input type="text" id="apellidos-y-nombres" class="input" pattern="[a-zA-Z\s]+">
+			</div>
+			<div class="label">
+				<label for="cedula">Cédula:</label>
+				<input type="text" id="cedula" class="input" maxlength="10" pattern="[0-9]+">
+			</div>
+			<div class="label">
+				<label for="direccion">Dirección o Unidad:</label>
+				<select id="direccion" class="select">
+					<option value="">Seleccione una opción</option>
+					<option value="Dirección 1">Dirección 1</option>
+					<!-- Agregar más opciones aquí -->
+				</select>
+			</div>
+			<div class="label">
+				<label for="coordinacion">Coordinación:</label>
+				<select id="coordinacion" class="select">
+					<option value="">Seleccione una opción</option>
+					<option value="Coordinacion Zonal 6- Senescyt">Coordinacion Zonal 6- Senescyt</option>
+					<!-- Agregar más opciones aquí -->
+				</select>
+			</div>
+			<div class="label">
+				<label for="provincia">Provincia:</label>
+				<select id="provincia" class="select">
+					<option value="">Seleccione una opción</option>
+					<option value="Azuay">Azuay</option>
+					<!-- Agregar más opciones aquí -->
+				</select>
+			</div>
+			<div class="label">
+				<label for="regimen">Régimen:</label>
+				<select id="regimen" class="select">
+					<option value="">Seleccione una opción</option>
+					<option value="LOSEP">LOSEP</option>
+					<!-- Agregar más opciones aquí -->
+				</select>
+			</div>
+			<div class="label">
+				<label for="motivo">Motivo:</label>
+				<select id="motivo" class="select">
+					<option value="">Seleccione una opción</option>
+					<option value="Permiso de dias con cargo a vacaciones">Permiso de dias con cargo a vacaciones</option>
+					<!-- Agregar más opciones aquí -->
+				</select>
+			</div>
+			<div class="label">
+				<label for="fecha-inicio-permiso">Fecha Inicio del Permiso:</label>
+				<input type="date" id="fecha-inicio-permiso" class="input">
+			</div>
+			<div class="label">
+				<label for="fecha-fin-permiso">Fecha Fin del Permiso:</label>
+				<input type="date" id="fecha-fin-permiso" class="input">
+			</div>
+			<div class="label">
+				<label for="observaciones">Observaciones o Justificativos:</label>
+				<textarea id="observaciones" class="input"></textarea>
+			</div>
+			<div class="button-container">
+				<button class="button" id="enviar">Enviar</button>
+				<button class="button" id="borrar">Borrar</button>
+			</div>
+		</form>
+	</div>
+
+	<script>
+		// Funciones para validar los campos
+		function esNumero(valor) {
+			return !isNaN(parseFloat(valor)) && isFinite(valor);
+		}
+
+		function mostrarAlerta(mensaje) {
+			alert(mensaje);
+		}
+
+		// Función para validar el formulario
+		function validarFormulario() {
+			const apellidosYnombres = document.getElementById("apellidos-y-nombres");
+			const cedula = document.getElementById("cedula");
+			const direccion = document.getElementById("direccion");
+			const coordinacion = document.getElementById("coordinacion");
+			const provincia = document.getElementById("provincia");
+			const regimen = document.getElementById("regimen");
+			const motivo = document.getElementById("motivo");
+			const fechaInicioPermiso = document.getElementById("fecha-inicio-permiso");
+			const fechaFinPermiso = document.getElementById("fecha-fin-permiso");
+			const observaciones = document.getElementById("observaciones");
+
+			let esValido = true;
+
+			if (!apellidosYnombres.value) {
+				mostrarAlerta("El campo Apellidos y Nombres es obligatorio.");
+				esValido = false;
+			}
+
+			if (!esNumero(cedula.value) || cedula.value.length !== 10) {
+				mostrarAlerta("El campo Cédula debe ser un número de 10 dígitos.");
+				esValido = false;
+			}
+
+			if (direccion.value === "") {
+	mostrarAlerta("El campo Dirección o Unidad es obligatorio.");
+				esValido = false;
+			}
+
+			if (coordinacion.value === "") {
+				mostrarAlerta("El campo Coordinación es obligatorio.");
+				esValido = false;
+			}
+
+			if (provincia.value === "") {
+				mostrarAlerta("El campo Provincia es obligatorio.");
+				esValido = false;
+			}
+
+			if (regimen.value === "") {
+				mostrarAlerta("El campo Régimen es obligatorio.");
+				esValido = false;
+			}
+
+			if (motivo.value === "") {
+				mostrarAlerta("El campo Motivo es obligatorio.");
+				esValido = false;
+			}
+
+			if (!fechaInicioPermiso.value) {
+				mostrarAlerta("El campo Fecha Inicio del Permiso es obligatorio.");
+				esValido = false;
+			}
+
+			if (!fechaFinPermiso.value) {
+				mostrarAlerta("El campo Fecha Fin del Permiso es obligatorio.");
+				esValido = false;
+			}
+
+			if (!observaciones.value) {
+				mostrarAlerta("El campo Observaciones o Justificativos es obligatorio.");
+				esValido = false;
+			}
+
+			if (esValido) {
+				const reporte =
+					"SUS DATOS GUARDADOS SON:\n\n" +
+					"Fecha Solicitud: " + new Date().toLocaleDateString() + "\n" +
+					"Apellidos y nombres servidor: " + apellidosYnombres.value + "\n" +
+					"Cedula:" + cedula.value + "\n" +
+					"Motivo: " + motivo.options[motivo.selectedIndex].text + "\n" +
+					"Observaciones o Justificativos: " + observaciones.value + "\n" +
+					"Fecha  inicio del permiso: " + fechaInicioPermiso.value + "\n" +
+					"fecha fin del permiso: " + fechaFinPermiso.value + "\n" +
+					"Coordinacion: " + coordinacion.options[coordinacion.selectedIndex].text + "\n" +
+					"Direccion o Unidad: " + direccion.options[direccion.selectedIndex].text + "\n" +
+					"Provincia: " + provincia.options[provincia.selectedIndex].text + "\n" +
+					"Regimen: " + regimen.options[regimen.selectedIndex].text;
+
+				mostrarAlerta(reporte);
+			}
+		}
+
+		// Función para borrar los valores de los campos
+		function borrarValores() {
+			const formulario = document.getElementById("formulario");
+			formulario.reset();
+		}
+
+		// Eventos de los botones
+		document.getElementById("enviar").addEventListener("click", validarFormulario);
+		document.getElementById("borrar").addEventListener("click", borrarValores);
+	</script>
+</body>
+</html>
